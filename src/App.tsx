@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grid } from "@mui/material";
+import SelectionTab from "./component/Sections/SelectionTab";
+import DisplayTab from "./component/Sections/DisplayTab";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Grid container spacing={2} sx={{ margin: "1%", flexGrow: 1 }}>
+        <Grid xs={4}>
+          <SelectionTab />
+        </Grid>
+        <Grid xs={8}>
+          <DisplayTab />
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
