@@ -1,13 +1,12 @@
-import { Grid } from "@mui/joy";
-import Button from "@mui/joy/Button";
-import AddIcon from '@mui/icons-material/Add';
+import { Grid, Button } from "@mui/joy";
+import AddIcon from "@mui/icons-material/Add";
 
 const AddButton = () => {
   return (
     <>
       <Grid container justifyContent="flex-end">
         <Button variant="solid" color="success" size="lg">
-          <AddIcon/> Add
+          <AddIcon /> Add
         </Button>
       </Grid>
     </>
