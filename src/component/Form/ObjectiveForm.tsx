@@ -1,5 +1,6 @@
 import FormWrapper from "../../wrapper/FormWrapper";
 import { Stack, TextField } from "@mui/material";
+import AdsClickIcon from '@mui/icons-material/AdsClick';
 
 type ObjectiveData = {
   objective: string;
@@ -12,7 +13,7 @@ type ObjectiveFormProps = ObjectiveData & {
 const ObjectiveForm = ({ objective, updateFields }: ObjectiveFormProps) => {
   return (
     <>
-      <FormWrapper title="Objective">
+      <FormWrapper title="Objective" name={<AdsClickIcon/>}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <TextField
             placeholder="Describe your object in a paragraph."

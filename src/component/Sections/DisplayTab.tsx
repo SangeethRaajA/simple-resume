@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Resume from "./Resume";
+import Dragger from "../Surface/Dragger";
 
 const DisplayTab = () => {
 
@@ -7,6 +8,7 @@ const DisplayTab = () => {
     <>
       <Box sx={{ mx: 'auto', width: "90%" }}>
         <Resume/>
+        <Dragger/>
       </Box>
     </>
   );

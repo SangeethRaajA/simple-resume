@@ -1,6 +1,7 @@
 import { Grid, Stack, TextField, Typography } from "@mui/material";
 import AddButton from "../Buttons/AddButton";
 import FormWrapper from "../../wrapper/FormWrapper";
+import SchoolIcon from '@mui/icons-material/School';
 
 type EducationData = {
   edu: {
@@ -22,7 +23,7 @@ const EducationForm = (props: EducationFormProps) => {
 
   return (
     <>
-      <FormWrapper title="Education">
+      <FormWrapper title="Education" name={<SchoolIcon/>}>
         <Stack direction="column" spacing={2} margin={2}>
           <Typography>Academy Name</Typography>
           <TextField

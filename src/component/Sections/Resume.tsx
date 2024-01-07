@@ -4,6 +4,7 @@ import styled from "@mui/system/styled";
 import DownloadIcon from "@mui/icons-material/Download";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import ProfileText from "../DisplayText/ProfileText";
 
 const Item = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
@@ -44,51 +45,56 @@ const Resume = () => {
                   />
                 </Item>
               </Grid>
+
               <Grid xs={4} md={9}>
                 <Item>
-                  <Typography>Profile </Typography>
+                  <Typography variant="h5">Profile </Typography>
+                  <hr />
+                  <p></p>
+                </Item>
+              </Grid>
+
+              <Grid xs={2} md={3}>
+                <Item>
+                  <Typography variant="h5">Contact </Typography>
+                  <hr />
+                  <p></p>
+                </Item>
+              </Grid>
+
+              <Grid xs={4} md={9}>
+                <Item>
+                  <Typography variant="h5">Work Experience </Typography>
+                  <hr />
+                  <p></p>
+                </Item>
+              </Grid>
+
+              <Grid xs={2} md={3}>
+                <Item>
+                  <Typography variant="h5">Skills </Typography>
+                  <hr />
+                  <p></p>
+                </Item>
+              </Grid>
+
+              <Grid xs={4} md={9}>
+                <Item>
+                  <Typography variant="h5">Education</Typography>
                   <hr />
                   <p></p>
                 </Item>
               </Grid>
               <Grid xs={2} md={3}>
                 <Item>
-                  <Typography>Contact </Typography>
+                  <Typography variant="h5"> Extracurricular </Typography>
                   <hr />
                   <p></p>
                 </Item>
               </Grid>
               <Grid xs={4} md={9}>
                 <Item>
-                  <Typography>Work Experience </Typography>
-                  <hr />
-                  <p></p>
-                </Item>
-              </Grid>
-              <Grid xs={2} md={3}>
-                <Item>
-                  <Typography>Skills </Typography>
-                  <hr />
-                  <p></p>
-                </Item>
-              </Grid>
-              <Grid xs={4} md={9}>
-                <Item>
-                  <Typography>Education</Typography>
-                  <hr />
-                  <p></p>
-                </Item>
-              </Grid>
-              <Grid xs={2} md={3}>
-                <Item>
-                  <Typography>Extracurricular </Typography>
-                  <hr />
-                  <p></p>
-                </Item>
-              </Grid>
-              <Grid xs={4} md={9}>
-                <Item>
-                  <Typography>Achivement</Typography>
+                  <Typography variant="h5">Achivement</Typography>
                   <hr />
                   <p></p>
                 </Item>

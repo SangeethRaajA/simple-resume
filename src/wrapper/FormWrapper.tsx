@@ -1,20 +1,23 @@
-import { Card, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { ReactNode } from "react";
 
 type FormWrapperProps = {
   title: string;
+  name: any;
   children: ReactNode;
 };
 
-const FormWrapper = ({ title, children }: FormWrapperProps) => {
+const FormWrapper = ({ title, name, children }: FormWrapperProps) => {
   return (
     <>
-      <Card variant="elevation" style={{backgroundColor: "grey"}}>
-        <Typography variant="h5" color="white" margin={2}>
-          {title}
-        </Typography>
-      </Card>
+      <Typography variant="h4">
+        <IconButton size="large" edge="end" color="inherit" aria-label="logo">
+          {name}
+        </IconButton>{" "}
+        {title}
+      </Typography>
 
+      <hr />
       <div>{children}</div>
     </>
   );

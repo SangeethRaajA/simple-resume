@@ -1,5 +1,8 @@
 import { Grid, Stack, TextField, Typography } from "@mui/material";
 import FormWrapper from "../../wrapper/FormWrapper";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useState } from "react";
+import ProfileText from "../DisplayText/ProfileText";
 
 // Defining the data structure for profile information
 type ProfileData = {
@@ -32,15 +35,17 @@ const ProfileForm = ({
   mail,
   updateFields,
 }: ProfileFormProps) => {
+  const [data, setData] = useState();
+
   return (
     <>
-    {/* Wrapper for the entire form with a specified title */}
-      <FormWrapper title="Profile">
+      {/* Wrapper for the entire form with a specified title */}
+      <FormWrapper title="Profile" name={<AccountCircleIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <Grid container spacing={2} margin={2}>
             <Grid xs={5}>
               <Typography>First Name</Typography>
-              <TextField 
+              <TextField
                 placeholder="First Name"
                 type="text"
                 value={firstname}

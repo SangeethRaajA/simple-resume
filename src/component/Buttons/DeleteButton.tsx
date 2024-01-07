@@ -1,12 +1,17 @@
-import { Grid } from "@mui/joy";
-import Button from "@mui/joy/Button";
+import { Button, Grid } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 const DeleteButton = () => {
   return (
     <>
-      <Grid container justifyContent="flex-end">
-        <Button variant="solid" color="danger" size="lg">
-          <RemoveIcon /> Remove
+      <Grid container marginBottom={2} marginLeft={2} display="flex">
+        <Button
+          type="button"
+          variant="contained"
+          startIcon={<RemoveIcon />}
+          size="large"
+          color="error"
+        >
+          Remove
         </Button>
       </Grid>
     </>

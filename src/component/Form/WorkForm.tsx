@@ -1,6 +1,7 @@
 import FormWrapper from "../../wrapper/FormWrapper";
 import { Grid, Stack, TextField, Typography } from "@mui/material";
 import AddButton from "../Buttons/AddButton";
+import WorkIcon from '@mui/icons-material/Work';
 
 type WorkData = {
   work: {
@@ -20,7 +21,7 @@ const WorkForm = (props: WorkFormProps) => {
   const { wname, role, sdate, edate, wdesc } = work;
   return (
     <>
-      <FormWrapper title="Work Experience">
+      <FormWrapper title="Work Experience" name={<WorkIcon/>}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <Typography>Work Place Name</Typography>
           <TextField placeholder="Name" type="text" value={wname}

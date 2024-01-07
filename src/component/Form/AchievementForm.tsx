@@ -1,6 +1,6 @@
 import FormWrapper from "../../wrapper/FormWrapper";
 import { Stack, TextField } from "@mui/material";
-
+import InfoIcon from '@mui/icons-material/Info';
 type AchievementData = {
   achievement: string[];
 };
@@ -15,7 +15,7 @@ const AchievementForm = ({
 }: AchievementFormProps) => {
   return (
     <>
-      <FormWrapper title="Achievement">
+      <FormWrapper title="Achievement" name={<InfoIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <TextField
             placeholder="Describe your achivement in a paragraph."
