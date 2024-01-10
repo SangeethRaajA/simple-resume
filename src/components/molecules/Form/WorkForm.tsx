@@ -1,51 +1,47 @@
+import FormWrapper from "../../../wrapper/FormWrapper";
 import { Grid, Stack, TextField, Typography } from "@mui/material";
-import AddButton from "../Buttons/AddButton";
-import FormWrapper from "../../wrapper/FormWrapper";
-import SchoolIcon from '@mui/icons-material/School';
+import WorkIcon from "@mui/icons-material/Work";
+import AddButton from "../../atmos/Buttons/AddButton";
 
-type EducationData = {
-  edu: {
-    ename: string;
-    estudy: string;
+type WorkData = {
+  work: {
+    wname: string;
+    role: string;
     sdate: Date;
     edate: Date;
-    edesc: string;
+    wdesc: string;
   };
 };
 
-type EducationFormProps = EducationData & {
-  updateFields: (fields: Partial<EducationData>) => void;
+type WorkFormProps = WorkData & {
+  updateFields: (fields: Partial<WorkData>) => void;
 };
-
-const EducationForm = (props: EducationFormProps) => {
-  const { edu, updateFields } = props;
-  const { ename, estudy, sdate, edate, edesc } = edu;
-
+const WorkForm = (props: WorkFormProps) => {
+  const { work, updateFields } = props;
+  const { wname, role, sdate, edate, wdesc } = work;
   return (
     <>
-      <FormWrapper title="Education" name={<SchoolIcon/>}>
-        <Stack direction="column" spacing={2} margin={2}>
-          <Typography>Academy Name</Typography>
+      <FormWrapper title="Work Experience" name={<WorkIcon />}>
+        <Stack direction={"column"} spacing={2} margin={2}>
+          <Typography>Work Place Name</Typography>
           <TextField
             placeholder="Name"
             type="text"
-            value={ename}
+            value={wname}
             onChange={(e) =>
-              updateFields({ edu: { ...edu, ename: e.target.value } })
+              updateFields({ work: { ...work, wname: e.target.value } })
             }
           />
-
-          <Typography>Field Of Study</Typography>
+          <Typography>Job Role</Typography>
           <TextField
-            placeholder="Study"
+            placeholder="Role"
             type="text"
-            value={estudy}
+            value={role}
             onChange={(e) =>
-              updateFields({ edu: { ...edu, estudy: e.target.value } })
+              updateFields({ work: { ...work, role: e.target.value } })
             }
           />
-
-          <Grid container spacing={2} sx={{ margin: "1%", flexGrow: 1 }}>
+          <Grid container spacing={2} sx={{ margin: "5%", flexGrow: 1 }}>
             <Grid xs={6}>
               <Typography>Start date</Typography>
               <TextField
@@ -53,12 +49,11 @@ const EducationForm = (props: EducationFormProps) => {
                 value={sdate.toISOString().split("T")[0]}
                 onChange={(e) =>
                   updateFields({
-                    edu: { ...edu, sdate: new Date(e.target.value) },
+                    work: { ...work, sdate: new Date(e.target.value) },
                   })
                 }
               />
             </Grid>
-
             <Grid xs={6}>
               <Typography>End date</Typography>
               <TextField
@@ -66,25 +61,23 @@ const EducationForm = (props: EducationFormProps) => {
                 value={edate.toISOString().split("T")[0]}
                 onChange={(e) =>
                   updateFields({
-                    edu: { ...edu, edate: new Date(e.target.value) },
+                    work: { ...work, edate: new Date(e.target.value) },
                   })
                 }
               />
             </Grid>
           </Grid>
-
           <Typography>Description</Typography>
           <TextField
             placeholder="MultiLine with rows: 2 and rowsMax: 4"
             multiline
             rows={2}
             maxRows={4}
-            value={edesc}
+            value={wdesc}
             onChange={(e) =>
-              updateFields({ edu: { ...edu, edesc: e.target.value } })
+              updateFields({ work: { ...work, wdesc: e.target.value } })
             }
           />
-
           <AddButton />
         </Stack>
       </FormWrapper>
@@ -92,4 +85,4 @@ const EducationForm = (props: EducationFormProps) => {
   );
 };
 
-export default EducationForm;
+export default WorkForm;

@@ -1,8 +1,7 @@
 import { Grid, Stack, TextField, Typography } from "@mui/material";
-import FormWrapper from "../../wrapper/FormWrapper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
-import ProfileText from "../DisplayText/ProfileText";
+import FormWrapper from "../../../wrapper/FormWrapper";
 
 // Defining the data structure for profile information
 type ProfileData = {
@@ -28,6 +27,8 @@ const ProfileForm = ({
   lastname,
   title,
   street,
+
+  
   city,
   state,
   phone,

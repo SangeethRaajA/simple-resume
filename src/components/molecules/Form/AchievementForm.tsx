@@ -1,6 +1,6 @@
-import FormWrapper from "../../wrapper/FormWrapper";
+import FormWrapper from "../../../wrapper/FormWrapper";
 import { Stack, TextField } from "@mui/material";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
 type AchievementData = {
   achievement: string[];
 };

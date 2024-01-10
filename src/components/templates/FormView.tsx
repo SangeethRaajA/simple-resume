@@ -1,14 +1,14 @@
-import { UseMultistepForm } from "../../Hooks/UseMultistepForm";
-import { Box, Button, Grid, Paper } from "@mui/material";
+import { UseMultistepForm } from "../../hooks/UseMultistepForm";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import ProfileForm from "../Form/ProfileForm";
-import EducationForm from "../Form/EducationForm";
+import ProfileForm from "../molecules/Form/ProfileForm";
+import EducationForm from "../molecules/Form/EducationForm";
 import { FormEvent, useState } from "react";
-import AchievementForm from "../Form/AchievementForm";
-import ObjectiveForm from "../Form/ObjectiveForm";
-import WorkForm from "../Form/WorkForm";
-import SkillForm from "../Form/SkillForm";
+import AchievementForm from "../molecules/Form/AchievementForm";
+import ObjectiveForm from "../molecules/Form/ObjectiveForm";
+import WorkForm from "../molecules/Form/WorkForm";
+import SkillForm from "../molecules/Form/SkillForm";
 import { styled } from "@mui/material/styles";
 
 type WorkData = {
@@ -113,54 +113,55 @@ const DisplayForm = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={3} marginBottom={1} >
-            <Item>ddd</Item>
-            <Item>ddd</Item>
-            <Item>ddd</Item>
-            <Item>ddd</Item>
+      <Box sx={{ flexGrow: 1 }} >
+        <Grid
+          display="flex"
+          justifyContent="left"
+          alignItems="center"
+          margin={2}
+        >
+          <Typography variant="h4">Create Resume</Typography>
+        </Grid>
+        <Grid container >
+          <Grid item xs={3} spacing={2}>
+            <Grid margin={1} spacing={2}>
+              {!isFirstStep && (
+                <Button
+                  type="button"
+                  variant="contained"
+                  startIcon={<NavigateBeforeIcon />}
+                  onClick={back}
+                  size="large"
+                  color="primary"
+                >
+                  Back
+                </Button>
+              )}
+              <Button
+                type="button"
+                variant="contained"
+                endIcon={<NavigateNextIcon />}
+                onClick={next}
+                size="large"
+                color="primary"
+              >
+                {isLastStep ? "Finish" : "Next"}
+              </Button>
+            </Grid>
           </Grid>
           <Grid item xs={9}>
-            <Item >
+            <Item>
               <Box>
-                <form onSubmit={handleSubmit} >
-                  <Box sx={{ mx: "auto", width: "50%", height:"50%" }}>{step}</Box>
-                  <Grid
-                    marginTop={1}
-                    justifyContent="flex-end"
-                    gap={1}
-                    display="flex"
-                  >
-                    {!isFirstStep && (
-                      <Button
-                        type="button"
-                        variant="contained"
-                        startIcon={<NavigateBeforeIcon />}
-                        onClick={back}
-                      >
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      type="button"
-                      variant="contained"
-                      endIcon={<NavigateNextIcon />}
-                      onClick={next}
-                    >
-                      {isLastStep ? "Finish" : "Next"}
-                    </Button>
-                  </Grid>
+                <form onSubmit={handleSubmit}>
+                  <Box sx={{ mx: "auto", width: "50%", height: "50%" }}>
+                    {step}
+                  </Box>
                 </form>
               </Box>
             </Item>
           </Grid>
         </Grid>
       </Box>
-
-      {/* <Box > */}
-
-      {/* </Box> */}
     </>
   );
 };

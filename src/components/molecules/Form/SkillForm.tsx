@@ -1,8 +1,8 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import FormWrapper from "../../wrapper/FormWrapper";
+import FormWrapper from "../../../wrapper/FormWrapper";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
-import BuildIcon from '@mui/icons-material/Build';
+import BuildIcon from "@mui/icons-material/Build";
 
 type SkillData = {
   skills: string[];
@@ -33,7 +33,7 @@ const SkillForm = ({ skills, skillItem, updateFields }: SkillFormProps) => {
 
   return (
     <>
-      <FormWrapper title="Skill" name={<BuildIcon/>}>
+      <FormWrapper title="Skill" name={<BuildIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <div>
             <Typography>List of Skills</Typography>

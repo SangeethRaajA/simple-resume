@@ -1,9 +1,14 @@
-import ViewTab from "./component/Surface/ViewTabs";
+import { Outlet } from "react-router";
+import { Grid } from "@mui/material";
+import NavBar from "./components/atmos/Nav/NavBar";
 
 function App() {
   return (
     <>
-      <ViewTab />      
+      <NavBar />
+      <Grid marginY={10}>
+        <Outlet />
+      </Grid>
     </>
   );
 }
