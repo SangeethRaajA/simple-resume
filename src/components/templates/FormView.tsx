@@ -1,4 +1,4 @@
-import { UseMultistepForm } from "../../hooks/UseMultistepForm";
+import UseMultistepForm from "../../hooks/UseMultistepForm";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -149,8 +149,7 @@ const DisplayForm = () => {
           <Grid item xs={8}>
             <Item>
               <Box>
-                <form onSubmit={handleSubmit}>
-                  {/* <Box sx={{ mx: "auto", width: "50%", height: "50%" }}> */}
+                <form onSubmit={handleSubmit}>                  
                   <Box>{step}</Box>
                 </form>
               </Box>
