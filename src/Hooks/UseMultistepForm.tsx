@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 
-export function UseMultistepForm(steps: ReactElement[]) {
+export default function UseMultistepForm(steps: ReactElement[]) {
   // Define StepIndex using UseState Hooks
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
