@@ -23,8 +23,8 @@ const WorkForm = (props: WorkFormProps) => {
     <>
       <FormWrapper title="Work Experience" name={<WorkIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
-          <Typography>Work Place Name</Typography>
           <TextField
+            label="Work Place Name"
             placeholder="Name"
             type="text"
             value={wname}
@@ -32,8 +32,8 @@ const WorkForm = (props: WorkFormProps) => {
               updateFields({ work: { ...work, wname: e.target.value } })
             }
           />
-          <Typography>Job Role</Typography>
           <TextField
+            label="Job Role"
             placeholder="Role"
             type="text"
             value={role}
@@ -67,8 +67,8 @@ const WorkForm = (props: WorkFormProps) => {
               />
             </Grid>
           </Grid>
-          <Typography>Description</Typography>
           <TextField
+            label="Describe Experience"
             placeholder="MultiLine with rows: 2 and rowsMax: 4"
             multiline
             rows={2}

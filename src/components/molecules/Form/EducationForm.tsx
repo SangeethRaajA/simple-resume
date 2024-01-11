@@ -25,8 +25,8 @@ const EducationForm = (props: EducationFormProps) => {
     <>
       <FormWrapper title="Education" name={<SchoolIcon />}>
         <Stack direction="column" spacing={2} margin={2}>
-          <Typography>Academy Name</Typography>
           <TextField
+            label="Academy Name"
             placeholder="Name"
             type="text"
             value={ename}
@@ -35,8 +35,8 @@ const EducationForm = (props: EducationFormProps) => {
             }
           />
 
-          <Typography>Field Of Study</Typography>
           <TextField
+            label="Field Of Study"
             placeholder="Study"
             type="text"
             value={estudy}
@@ -73,8 +73,8 @@ const EducationForm = (props: EducationFormProps) => {
             </Grid>
           </Grid>
 
-          <Typography>Description</Typography>
           <TextField
+            label="Describe Experience"
             placeholder="MultiLine with rows: 2 and rowsMax: 4"
             multiline
             rows={2}

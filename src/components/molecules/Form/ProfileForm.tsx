@@ -2,6 +2,7 @@ import { Grid, Stack, TextField, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import FormWrapper from "../../../wrapper/FormWrapper";
+import { IResume } from "../../../interfaces/resume.interface";
 
 // Defining the data structure for profile information
 type ProfileData = {
@@ -17,7 +18,7 @@ type ProfileData = {
 };
 
 // Combining profile data with a function to update fields
-type ProfileFormProps = ProfileData & {
+type ProfileFormProps = IResume & {
   updateFields: (fields: Partial<ProfileData>) => void;
 };
 
@@ -28,7 +29,6 @@ const ProfileForm = ({
   title,
   street,
 
-  
   city,
   state,
   phone,
@@ -42,74 +42,82 @@ const ProfileForm = ({
     <>
       {/* Wrapper for the entire form with a specified title */}
       <FormWrapper title="Profile" name={<AccountCircleIcon />}>
-        <Stack direction={"column"} spacing={2} margin={2}>
+        <Stack direction={"column"} spacing={2} margin={1}>
           <Grid container spacing={2} margin={2}>
             <Grid xs={5}>
-              <Typography>First Name</Typography>
               <TextField
-                placeholder="First Name"
+                label="First Name"
+                placeholder="John"
                 type="text"
+                name="firstname"
                 value={firstname}
-                // Update the first name on input change
                 onChange={(e) => updateFields({ firstname: e.target.value })}
               />
             </Grid>
             <Grid xs={1} />
             <Grid xs={5}>
-              <Typography>Last Name</Typography>
               <TextField
-                placeholder="Lastname Name"
+                label="Last Name"
+                placeholder="Kennedy"
                 type="text"
+                name="lastname"
                 value={lastname}
                 onChange={(e) => updateFields({ lastname: e.target.value })}
               />
             </Grid>
           </Grid>
-          <Typography>Title</Typography>
           <TextField
+            label="Title"
             type="text"
-            placeholder="Title"
+            placeholder="UI Designer"
+            name="Title"
             value={title}
             onChange={(e) => updateFields({ title: e.target.value })}
           />
-          <Typography>Address Line 01</Typography>
           <TextField
-            placeholder="Street"
+            label="Address Line 01"
+            name="street"
+            placeholder="18/B"
             type="text"
             value={street}
             onChange={(e) => updateFields({ street: e.target.value })}
           />
-          <Typography>Address Line 02</Typography>
           <TextField
-            placeholder="City"
-            type="text"
-            value={city}
-            onChange={(e) => updateFields({ city: e.target.value })}
-          />
-          <Typography>Address Line 03</Typography>
-          <TextField
-            placeholder="State"
+            label="Address Line 02"
+            name="state"
+            placeholder="queens street"
             type="text"
             value={state}
             onChange={(e) => updateFields({ state: e.target.value })}
           />
-          <Typography>Contact Number</Typography>
           <TextField
-            placeholder="Contact"
+            label="Address Line 03"
+            name="city"
+            placeholder="London"
+            type="text"
+            value={city}
+            onChange={(e) => updateFields({ city: e.target.value })}
+          />
+          <TextField
+            label="Contact"
+            name="phone"
+            placeholder="4565 565 5659"
             type="tel"
             value={phone}
             onChange={(e) => updateFields({ phone: e.target.value })}
           />
-          <Typography>Website</Typography>
           <TextField
-            placeholder="Website"
+            label="Website"
+            name="website"
+            placeholder="kenndy.com"
             type="text"
             value={website}
             onChange={(e) => updateFields({ website: e.target.value })}
           />
-          <Typography>Email Address</Typography>
           <TextField
-            placeholder="Email"
+            label="Mail"
+            name="mail"
+            placeholder="jkennedy@gmail.com"
             type="mail"
             value={mail}
             onChange={(e) => updateFields({ mail: e.target.value })}

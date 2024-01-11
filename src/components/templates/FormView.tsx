@@ -42,10 +42,6 @@ type FormData = {
   edu: EduData;
   achievement: string[];
   skills: string[];
-  skillItem: {
-    text: string;
-  }[];
-  // extra: string;
 };
 
 const INITIAL_DATA: FormData = {
@@ -75,8 +71,6 @@ const INITIAL_DATA: FormData = {
   },
   achievement: [],
   skills: [],
-  skillItem: [{ text: "" }],
-  // extra: "",
 };
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -113,18 +107,21 @@ const DisplayForm = () => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} >
-        <Grid
-          display="flex"
-          justifyContent="left"
-          alignItems="center"
-          margin={2}
-        >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid display="flex" justifyContent="left" alignItems="left" margin={2}>
           <Typography variant="h4">Create Resume</Typography>
         </Grid>
-        <Grid container >
-          <Grid item xs={3} spacing={2}>
-            <Grid margin={1} spacing={2}>
+        <Grid container>
+          <Grid
+            item
+            xs={3}
+            spacing={2}
+            display="flex"
+            justifyContent="left"
+            alignItems="left"
+            margin={2}
+          >
+            <Grid margin={1}>
               {!isFirstStep && (
                 <Button
                   type="button"
@@ -149,13 +146,12 @@ const DisplayForm = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={8}>
             <Item>
               <Box>
                 <form onSubmit={handleSubmit}>
-                  <Box sx={{ mx: "auto", width: "50%", height: "50%" }}>
-                    {step}
-                  </Box>
+                  {/* <Box sx={{ mx: "auto", width: "50%", height: "50%" }}> */}
+                  <Box>{step}</Box>
                 </form>
               </Box>
             </Item>

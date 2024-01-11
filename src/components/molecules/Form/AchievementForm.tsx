@@ -18,6 +18,7 @@ const AchievementForm = ({
       <FormWrapper title="Achievement" name={<InfoIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
           <TextField
+            label="Describe Achievement"
             placeholder="Describe your achivement in a paragraph."
             multiline
             rows={2}
