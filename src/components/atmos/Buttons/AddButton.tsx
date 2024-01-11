@@ -12,7 +12,7 @@ const AddButton = () => {
           size="large"
           color="success"
         >
-          Remove
+          Add
         </Button>
       </Grid>
     </>

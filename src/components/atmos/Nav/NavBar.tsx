@@ -27,7 +27,7 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar position= "absolute" color="warning">
+      <AppBar position= "absolute" color="primary">
         <Toolbar>
           <IconButton
             size="large"

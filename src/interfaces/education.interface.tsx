@@ -1,8 +1,8 @@
 export interface IEducation {
-  _id?: string;
-  ename: string;
-  estudy: string;
-  sdate: Date;
-  edate: Date;
-  edesc: string;
+  id?: number;
+  ename?: string;
+  estudy?: string;
+  sdate?: Date;
+  edate?: Date;
+  edesc?: string;
 }

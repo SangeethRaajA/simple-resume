@@ -1,10 +1,9 @@
-import { Resume } from "../../components/templates/Resume";
+import { ResumeView } from "../../components/templates/ResumeView";
 
 const ViewPage = () => {
   return (
     <>
-      ViewPage
-      <Resume />
+      <ResumeView />
     </>
   );
 };

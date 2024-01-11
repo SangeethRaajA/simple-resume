@@ -2,7 +2,7 @@ import { IEducation } from "./education.interface";
 import { IWork } from "./work.interface";
 
 export interface IResume {
-  _id?: string;
+  id?: string;
   firstname?: string;
   lastname?: string;
   title?: string;
@@ -17,5 +17,7 @@ export interface IResume {
   edu?: IEducation;
   achievement?: string[];
   skills?: string[];
+  createdAt?: number;
+  updatedAt?: number;
   onClickDelete?: void;
 }

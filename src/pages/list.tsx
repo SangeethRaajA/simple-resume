@@ -1,9 +1,9 @@
-import ListResume from "../components/templates/ListResume";
+import ListView from "../components/templates/ListView";
 
 const ListPage = () => {
   return (
     <>
-      <ListResume />
+      <ListView/>
     </>
   );
 };
