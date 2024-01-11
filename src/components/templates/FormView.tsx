@@ -1,4 +1,3 @@
-import UseMultistepForm from "../../hooks/UseMultistepForm";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -10,6 +9,7 @@ import ObjectiveForm from "../molecules/Form/ObjectiveForm";
 import WorkForm from "../molecules/Form/WorkForm";
 import SkillForm from "../molecules/Form/SkillForm";
 import { styled } from "@mui/material/styles";
+import UseMultistepFormResume from "../../hooks/UseMultistepFormResume";
 
 type WorkData = {
   wname: string;
@@ -91,7 +91,7 @@ const DisplayForm = () => {
   }
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    UseMultistepForm([
+  UseMultistepFormResume([
       <ProfileForm {...data} updateFields={updateFields} />,
       <ObjectiveForm {...data} updateFields={updateFields} />,
       <WorkForm {...data} updateFields={updateFields} />,
