@@ -29,27 +29,26 @@ export const ResumeView = () => {
         const componentHeight = doc.internal.pageSize.getHeight();
         doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
         setLoader(false);
-        doc.save("resume.pdf");
+        doc.save(`resume-${details?.firstname}-${details?.title}.pdf`);
       });
     }
   };
 
-  //fetch data
-  const fetchData = async () => {
-    const response = await fetch(
-      `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/${id}`
-    );
-    const data = await response.json();
-    setDetails(data.data);
-    console.log(data);
-
-    if (!response.ok) {
-      const msg = `Error occured : ${response.status}`;
-      throw new Error(msg);
-    }
-  };
-
+  //fetch data in useEffect
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/${id}`
+      );
+      const data = await response.json();
+      setDetails(data.data);
+      console.log(data);
+  
+      if (!response.ok) {
+        const msg = `Error occured : ${response.status}`;
+        throw new Error(msg);
+      }
+    };
     fetchData();
     setIsLoading(false);
   }, []);

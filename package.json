@@ -20,6 +20,7 @@
     "@types/react-dom": "^18.2.18",
     "@types/yup": "^0.32.0",
     "axios": "^1.6.5",
+    "cross-env": "^7.0.3",
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
