@@ -13,8 +13,8 @@ export interface IResume {
   website?: string;
   mail?: string;
   objective?: string;
-  work?: IWork;
-  edu?: IEducation;
+  work?: IWork[];
+  edu?: IEducation[];
   achievement?: string[];
   skills?: string[];
   createdAt?: number;

@@ -54,10 +54,12 @@ const SkillForm = ({ skills, updateFields }: SkillFormProps) => {
     <>
       <FormWrapper title="Skill" name={<BuildIcon />}>
         <Stack direction={"column"} spacing={2} margin={2}>
-          <Stack spacing={2} margin={2}>
+          <Stack direction={"row"} spacing={2} margin={2}>
             {data.map((val, i) => (
               <div className="div">
-                <Input
+                <TextField
+                  label="Skill"
+                  placeholder="Add Skills"
                   type="text"
                   name="skill"
                   value={val.skill}
@@ -65,7 +67,7 @@ const SkillForm = ({ skills, updateFields }: SkillFormProps) => {
                 />
                 <Button
                   onClick={() => handleDelete(i)}
-                  variant="outlined"
+                  variant="contained"
                   color="error"
                   startIcon={<RemoveIcon />}
                 >

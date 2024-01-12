@@ -28,7 +28,6 @@ const ProfileForm = ({
   lastname,
   title,
   street,
-
   city,
   state,
   phone,
@@ -36,36 +35,31 @@ const ProfileForm = ({
   mail,
   updateFields,
 }: ProfileFormProps) => {
-  const [data, setData] = useState();
-
   return (
     <>
       {/* Wrapper for the entire form with a specified title */}
       <FormWrapper title="Profile" name={<AccountCircleIcon />}>
         <Stack direction={"column"} spacing={2} margin={1}>
-          <Grid container spacing={2} margin={2}>
-            <Grid xs={5}>
-              <TextField
-                label="First Name"
-                placeholder="John"
-                type="text"
-                name="firstname"
-                value={firstname}
-                onChange={(e) => updateFields({ firstname: e.target.value })}
-              />
-            </Grid>
-            <Grid xs={1} />
-            <Grid xs={5}>
-              <TextField
-                label="Last Name"
-                placeholder="Kennedy"
-                type="text"
-                name="lastname"
-                value={lastname}
-                onChange={(e) => updateFields({ lastname: e.target.value })}
-              />
-            </Grid>
-          </Grid>
+          <Stack direction={"row"} spacing={2}>
+            <TextField
+              label="First Name"
+              placeholder="John"
+              fullWidth
+              type="text"
+              name="firstname"
+              value={firstname}
+              onChange={(e) => updateFields({ firstname: e.target.value })}
+            />
+            <TextField
+              label="Last Name"
+              placeholder="Kennedy"
+              fullWidth
+              type="text"
+              name="lastname"
+              value={lastname}
+              onChange={(e) => updateFields({ lastname: e.target.value })}
+            />
+          </Stack>
           <TextField
             label="Title"
             type="text"

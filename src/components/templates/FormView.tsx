@@ -1,17 +1,19 @@
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import ProfileForm from "../molecules/Form/ProfileForm";
-import EducationForm from "../molecules/Form/EducationForm";
 import { FormEvent, useState } from "react";
 import AchievementForm from "../molecules/Form/AchievementForm";
 import ObjectiveForm from "../molecules/Form/ObjectiveForm";
-import WorkForm from "../molecules/Form/WorkForm";
 import SkillForm from "../molecules/Form/SkillForm";
 import { styled } from "@mui/material/styles";
 import UseMultistepFormResume from "../../hooks/UseMultistepFormResume";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import WorkFormNew from "../molecules/Form/WorkFormNew";
+import ProfileForm from "../molecules/Form/ProfileForm";
+import EducationFormNew from "../molecules/Form/EducationFormNew";
 
 type WorkData = {
+  id: number;
   wname: string;
   role: string;
   sdate: Date;
@@ -20,6 +22,7 @@ type WorkData = {
 };
 
 type EduData = {
+  id: number;
   ename: string;
   estudy: string;
   sdate: Date;
@@ -38,8 +41,8 @@ type FormData = {
   website: string;
   mail: string;
   objective: string;
-  work: WorkData;
-  edu: EduData;
+  works: WorkData[];
+  educations: EduData[];
   achievement: string[];
   skills: string[];
 };
@@ -55,26 +58,35 @@ const INITIAL_DATA: FormData = {
   website: "",
   mail: "",
   objective: "",
-  work: {
-    wname: "",
-    role: "",
-    sdate: new Date(),
-    edate: new Date(),
-    wdesc: "",
-  },
-  edu: {
-    ename: "",
-    estudy: "",
-    sdate: new Date(),
-    edate: new Date(),
-    edesc: "",
-  },
+  works: [
+    {
+      id: 1,
+      wname: "",
+      role: "",
+      sdate: new Date(),
+      edate: new Date(),
+      wdesc: "",
+    },
+  ],
+  educations: [
+    {
+      id: 1,
+      ename: "",
+      estudy: "",
+      sdate: new Date(),
+      edate: new Date(),
+      edesc: "",
+    },
+  ],
   achievement: [],
   skills: [],
 };
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "ButtonShadow",
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? theme.palette.background.default
+      : theme.palette.background.paper,
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "left",
@@ -91,19 +103,54 @@ const DisplayForm = () => {
   }
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-  UseMultistepFormResume([
+    UseMultistepFormResume([
       <ProfileForm {...data} updateFields={updateFields} />,
       <ObjectiveForm {...data} updateFields={updateFields} />,
-      <WorkForm {...data} updateFields={updateFields} />,
-      <EducationForm {...data} updateFields={updateFields} />,
+      <WorkFormNew {...data} updateFields={updateFields} />,
+      <EducationFormNew {...data} updateFields={updateFields} />,
       <AchievementForm {...data} updateFields={updateFields} />,
       <SkillForm {...data} updateFields={updateFields} />,
     ]);
 
+  const fetchData = async (formData: FormData) => {
+    try {
+      const response = await fetch(
+        "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const errorMsg = `Error occurred: ${
+          responseData.error || response.status
+        }`;
+        throw new Error(errorMsg);
+      }
+
+      // Handle the response data if needed
+      console.log(responseData);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     next();
+    // fetchData(data);
+    // console.log(data);
   }
+  const handleClick = () => {
+    fetchData(data);
+    console.log(data);
+  };
 
   return (
     <>
@@ -134,22 +181,35 @@ const DisplayForm = () => {
                   Back
                 </Button>
               )}
-              <Button
-                type="button"
-                variant="contained"
-                endIcon={<NavigateNextIcon />}
-                onClick={next}
-                size="large"
-                color="primary"
-              >
-                {isLastStep ? "Finish" : "Next"}
-              </Button>
+              {isLastStep ? (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  endIcon={<CheckCircleOutlineIcon />}
+                  onClick={handleClick}
+                  size="large"
+                  color="success"
+                >
+                  Finish
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  variant="contained"
+                  endIcon={<NavigateNextIcon />}
+                  onClick={next}
+                  size="large"
+                  color="primary"
+                >
+                  Next
+                </Button>
+              )}
             </Grid>
           </Grid>
           <Grid item xs={8}>
             <Item>
               <Box>
-                <form onSubmit={handleSubmit}>                  
+                <form onSubmit={handleSubmit}>
                   <Box>{step}</Box>
                 </form>
               </Box>

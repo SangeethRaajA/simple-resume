@@ -134,7 +134,7 @@ export const ResumeView = () => {
                 <Grid item xs={3}></Grid>
 
                 <Grid item xs={9}>
-                  <WorkExperience work={details?.work ? [details.work] : []} />
+                  {/* <WorkExperience work={details?.work ? [details.work] : []} /> */}
                 </Grid>
 
                 <Grid item xs={3}>
@@ -146,7 +146,7 @@ export const ResumeView = () => {
                   </Typography>
                 </Grid>
                 <Grid item xs={9}>
-                  <EducationGrid work={details?.edu ? [details.edu] : []} />
+                  {/* <EducationGrid work={details?.edu ? [details.edu] : []} /> */}
                 </Grid>
 
                 <Grid container>
