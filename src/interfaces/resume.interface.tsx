@@ -15,7 +15,7 @@ export interface IResume {
   objective?: string;
   work?: IWork[];
   edu?: IEducation[];
-  achievement?: string[];
+  achievements?: string[];
   skills?: string[];
   createdAt?: number;
   updatedAt?: number;

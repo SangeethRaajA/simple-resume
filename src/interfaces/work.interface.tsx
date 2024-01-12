@@ -2,7 +2,7 @@ export interface IWork {
   id?: number;
   wname?: string;
   role?: string;
-  sdate?: Date;
-  edate?: Date;
+  sdate?: Date | any;
+  edate?: Date | any;
   wdesc?: string;
 }

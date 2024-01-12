@@ -144,8 +144,6 @@ const DisplayForm = () => {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     next();
-    // fetchData(data);
-    // console.log(data);
   }
   const handleClick = () => {
     fetchData(data);
@@ -168,7 +166,7 @@ const DisplayForm = () => {
             alignItems="left"
             margin={2}
           >
-            <Grid margin={1}>
+            <Grid margin={1} >
               {!isFirstStep && (
                 <Button
                   type="button"

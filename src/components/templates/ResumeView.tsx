@@ -1,41 +1,40 @@
 import { useEffect, useState } from "react";
-import {
-  Grid,
-  Button,
-  Box,
-  Typography,
-  IconButton,
-  TableBody,
-  TableCell,
-  TableRow,
-  Card,
-  Avatar,
-} from "@mui/material";
-import { Draggable } from "react-drag-reorder";
+import { Grid, Box, Typography, Card, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { IResume } from "../../interfaces/resume.interface";
 import WorkExperience from "../molecules/Grid/WorkExperience";
 import EducationGrid from "../molecules/Grid/EducationGrid";
+import SkillsGrid from "../molecules/Grid/SkillsGrid";
+import AchivementGrid from "../molecules/Grid/AchivementGrid";
+import DownloadIcon from "@mui/icons-material/Download";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export const ResumeView = () => {
   let { id } = useParams();
 
   const [details, setDetails] = useState<IResume>();
   const [isLoading, setIsLoading] = useState(true);
+  const [loader, setLoader] = useState(false);
 
-  const [skills, setSkills] = useState<string[]>([]);
-
-  const [words, setWords] = useState<string[]>([
-    "Hello",
-    "Hi",
-    "How are you",
-    "Cool",
-  ]);
-
-  const getChangedPos = (currentPos: number, newPos: number) => {
-    console.log(currentPos, newPos);
+  //download resume
+  const downloadPDF = () => {
+    const capture = document.querySelector(".simple-resume");
+    if (capture) {
+      setLoader(true);
+      html2canvas(capture as HTMLElement).then((canvas) => {
+        const imgData = canvas.toDataURL("img/png");
+        const doc = new jsPDF();
+        const componentWidth = doc.internal.pageSize.getWidth();
+        const componentHeight = doc.internal.pageSize.getHeight();
+        doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
+        setLoader(false);
+        doc.save("resume.pdf");
+      });
+    }
   };
 
+  //fetch data
   const fetchData = async () => {
     const response = await fetch(
       `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/${id}`
@@ -76,7 +75,15 @@ export const ResumeView = () => {
             alignItems="center"
             margin={2}
           >
-            <Grid container xs={8} margin={1} spacing={1}>
+            <Grid
+              className="simple-resume"
+              container
+              xs={8}
+              margin={1}
+              spacing={1}
+              border={1}
+            >
+              {/* PROFILE SECTION */}
               <Grid
                 container
                 style={{ backgroundColor: "blueviolet", color: "white" }}
@@ -104,78 +111,76 @@ export const ResumeView = () => {
                   xs={3}
                   justifyContent="flex-end"
                   alignItems="flex-end"
-                  margin={1}
+                  margin={3}
                 >
-                  <Typography variant="subtitle1">{details?.phone}</Typography>
-                  <Typography variant="subtitle1">
-                    {details?.website}
-                  </Typography>
-                  <Typography variant="subtitle1">{details?.mail}</Typography>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      {details?.phone} ✆
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      {details?.website}🌐
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      {details?.mail}📧
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
               <br />
               <hr />
+
               <Grid container>
+                {/* OBJECTIVE SECTION */}
+
                 <Grid item xs={3}>
-                  <Typography variant="h5">
-                    <b>Skills</b>
-                  </Typography>
+                  <SkillsGrid skills={details?.skills || []} />
                 </Grid>
                 <Grid item xs={9}>
-                  <Typography variant="h5">
-                    <b>Objective</b>
-                  </Typography>
+                  <Grid
+                    container
+                    style={{ backgroundColor: "grey", color: "white" }}
+                  >
+                    <Typography variant="h5" marginLeft={1}>
+                      <b> Objective</b>
+                    </Typography>
+                  </Grid>
                   <Typography variant="subtitle1">
                     {details?.objective}
                   </Typography>
                   <br />
-                </Grid>
 
-                <Grid item xs={3}></Grid>
+                  {/* WORK EXPERIENCE SECTION */}
+                  <WorkExperience works={details?.work || []} />
 
-                <Grid item xs={9}>
-                  {/* <WorkExperience work={details?.work ? [details.work] : []} /> */}
-                </Grid>
+                  {/* WORK SECTION */}
 
-                <Grid item xs={3}>
-                  <Typography variant="h5">
-                    <b>Achivements</b>
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    <b>{details?.achievement}</b>
-                  </Typography>
-                </Grid>
-                <Grid item xs={9}>
-                  {/* <EducationGrid work={details?.edu ? [details.edu] : []} /> */}
-                </Grid>
+                  <EducationGrid educations={details?.edu || []} />
 
-                <Grid container>
-                  {/* Left Dragger */}
-                  {/* <Grid xs={4} border={2}>
-                    <Draggable onPosChange={getChangedPos}>
-                      {words.map((word, idx) => (
-                        <div key={idx} className="flex-item">
-                          {word}
-                        </div>
-                      ))}
-                    </Draggable>
-                  </Grid> */}
+                  {/* ACHIVEMENT SECTION */}
 
-                  {/* Right Dragger */}
-                  {/* <Grid xs={4} border={2}>
-                    <Draggable onPosChange={getChangedPos}>
-                      {words.map((word, idx) => (
-                        <div key={idx} className="flex-item">
-                          {word}
-                        </div>
-                      ))}
-                    </Draggable>
-                  </Grid> */}
+                  <AchivementGrid achivements={details?.achievements || []} />
                 </Grid>
               </Grid>
             </Grid>
+
+            
           </Grid>
+          
         )}
+        <Grid container justifyContent="center">
+            <Button
+              variant="contained"
+              endIcon={<DownloadIcon />}
+              onClick={downloadPDF}
+            >
+              {loader ? <span>Downloading</span> : <span>Download</span>}
+            </Button>
+          </Grid>
+          
       </Box>
     </>
   );
