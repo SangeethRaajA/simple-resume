@@ -14,7 +14,7 @@ ReactJS application which helps the user to build their resume.
 
 - ReactJs(Typescript) - Frontend 
 - Material UI - CSS and Styling
-- AWS - Deployment
+- cloudflare - Deployment
 
 
 ## Hosted in cloudflare
