@@ -121,7 +121,6 @@ const DisplayForm = () => {
     try {
       const response = await fetch(
         "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
-        // "http://localhost:8080/api/v1/resume/save",
         {
           method: "POST",
           headers: {
