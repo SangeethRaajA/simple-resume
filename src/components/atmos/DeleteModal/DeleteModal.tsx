@@ -1,72 +1,57 @@
-import { Box, Button, Modal, Stack, Typography } from "@mui/material";
-import { IResume } from "../../../interfaces/resume.interface";
-import { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface IDeleteModal {
-  resume: IResume;
+  deleteId: string;
   isOpen: boolean;
-  onClickDelete: () => void;
   onClickClose: () => void;
 }
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+const DeleteModal = ({ deleteId, isOpen, onClickClose }: IDeleteModal) => {
 
-const DeleteModal = ({
-  resume,
-  isOpen,
-  onClickClose,
-  onClickDelete,
-}: IDeleteModal) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // DELETE request using fetch inside useEffect React hook
+  const fetchData = async () => {
+    const response = await fetch(
+      `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/delete/${deleteId}`,
+      { method: "DELETE" }
+    )
+    console.log(response);
+    
+  };
+
+  const onClickDeleteResume = () => {
+    fetchData();
+  };
 
   return (
-    <>
-      <Modal
-        open={isOpen}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete Resume
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {/* Are you sure you want to delete employee {resume?.firstName} */}
-          </Typography>
-          <Stack
-            spacing={1}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Button onClick={onClickDelete} variant="contained" color="error">
-              Delete
-            </Button>
-            <Button
-              onClick={onClickClose}
-              variant="contained"
-              color="secondary"
-            >
-              Close
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
-    </>
+    <Dialog
+      open={isOpen}
+      onClose={onClickClose}
+      style={{ backgroundColor: "grey", color: "white" }}
+    >
+      <DialogTitle>Delete Resume</DialogTitle>
+      <DialogContent>
+        <p>Are you sure you want to delete resume?</p>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={onClickDeleteResume}
+          variant="contained"
+          color="error"
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+        <Button onClick={onClickClose} variant="contained" color="warning">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default DeleteModal;
+export { DeleteModal };

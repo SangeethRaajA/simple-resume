@@ -2,18 +2,19 @@ import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { FormEvent, useState } from "react";
-import AchievementForm from "../molecules/Form/AchievementForm";
 import ObjectiveForm from "../molecules/Form/ObjectiveForm";
-import SkillForm from "../molecules/Form/SkillForm";
 import { styled } from "@mui/material/styles";
 import UseMultistepFormResume from "../../hooks/UseMultistepFormResume";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import WorkFormNew from "../molecules/Form/WorkFormNew";
 import ProfileForm from "../molecules/Form/ProfileForm";
 import EducationFormNew from "../molecules/Form/EducationFormNew";
+import SkillFormNew from "../molecules/Form/SkillFormNew";
+import AchivementFormNew from "../molecules/Form/AchivementFormNew";
+import { useNavigate } from "react-router-dom";
 
 type WorkData = {
-  id: number;
+  // id: number;
   wname: string;
   role: string;
   sdate: Date;
@@ -22,7 +23,7 @@ type WorkData = {
 };
 
 type EduData = {
-  id: number;
+  // id: number;
   ename: string;
   estudy: string;
   sdate: Date;
@@ -41,9 +42,9 @@ type FormData = {
   website: string;
   mail: string;
   objective: string;
-  works: WorkData[];
-  educations: EduData[];
-  achievement: string[];
+  work: WorkData[];
+  edu: EduData[];
+  achievements: string[];
   skills: string[];
 };
 
@@ -58,9 +59,9 @@ const INITIAL_DATA: FormData = {
   website: "",
   mail: "",
   objective: "",
-  works: [
+  work: [
     {
-      id: 1,
+      // id: 1,
       wname: "",
       role: "",
       sdate: new Date(),
@@ -68,9 +69,9 @@ const INITIAL_DATA: FormData = {
       wdesc: "",
     },
   ],
-  educations: [
+  edu: [
     {
-      id: 1,
+      // id: 1,
       ename: "",
       estudy: "",
       sdate: new Date(),
@@ -78,7 +79,7 @@ const INITIAL_DATA: FormData = {
       edesc: "",
     },
   ],
-  achievement: [],
+  achievements: [],
   skills: [],
 };
 
@@ -102,20 +103,25 @@ const DisplayForm = () => {
     });
   }
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
+  const { step, isFirstStep, isLastStep, back, next } =
     UseMultistepFormResume([
       <ProfileForm {...data} updateFields={updateFields} />,
       <ObjectiveForm {...data} updateFields={updateFields} />,
+      <SkillFormNew {...data} updateFields={updateFields}/>,
       <WorkFormNew {...data} updateFields={updateFields} />,
       <EducationFormNew {...data} updateFields={updateFields} />,
-      <AchievementForm {...data} updateFields={updateFields} />,
-      <SkillForm {...data} updateFields={updateFields} />,
+      <AchivementFormNew {...data} updateFields={updateFields}/>,
     ]);
 
+    //navigate page from list
+  let navigate = useNavigate();
+  
+  //fetch resume save
   const fetchData = async (formData: FormData) => {
     try {
       const response = await fetch(
         "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
+        // "http://localhost:8080/api/v1/resume/save",
         {
           method: "POST",
           headers: {
@@ -148,6 +154,7 @@ const DisplayForm = () => {
   const handleClick = () => {
     fetchData(data);
     console.log(data);
+    navigate(``);
   };
 
   return (

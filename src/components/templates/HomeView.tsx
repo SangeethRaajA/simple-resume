@@ -2,8 +2,6 @@ import {
   Typography,
   Button,
   Link,
-  Card,
-  CardActions,
   CardContent,
   Box,
   Grid,
@@ -56,8 +54,7 @@ const HomeView = () => {
               </Button>
             </Link>
           </Grid>
-          </CardContent>
-          
+          </CardContent>          
         </Grid>
       </Box>
     </>

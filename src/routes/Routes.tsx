@@ -16,6 +16,7 @@ export const router = createBrowserRouter([
             {path: "create", element: <CreatePage />},
             {path: "view/:id", element: <ViewPage />},
             {path: "edit/:id", element: <EditPage />},
+            {path: "delete/:id", element: <ListPage />},
         ]
     }
 ])

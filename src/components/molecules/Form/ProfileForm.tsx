@@ -1,6 +1,5 @@
-import { Grid, Stack, TextField, Typography } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useState } from "react";
 import FormWrapper from "../../../wrapper/FormWrapper";
 import { IResume } from "../../../interfaces/resume.interface";
 

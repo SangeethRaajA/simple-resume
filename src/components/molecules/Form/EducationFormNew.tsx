@@ -2,12 +2,11 @@ import { ChangeEvent, FC } from "react";
 import { Button, TextField, Grid, Typography, Stack } from "@mui/material";
 import FormWrapper from "../../../wrapper/FormWrapper";
 import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteIcon from "@mui/icons-material/Delete";
 import SchoolIcon from "@mui/icons-material/School";
 
 type EducationData = {
-  educations: {
-    id: number;
+  edu: {
     ename: string;
     estudy: string;
     sdate: Date;
@@ -21,7 +20,7 @@ type EducationFormProps = EducationData & {
 };
 
 const EducationFormNew: FC<EducationFormProps> = (props) => {
-  const { educations, updateFields } = props;
+  const { edu, updateFields } = props;
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -29,34 +28,34 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
   ) => {
     const { name, value } = e.target;
 
-    const updatedWorks = educations.map((entry, i) =>
+    const updatedWorks = edu.map((entry, i) =>
       i === index ? { ...entry, [name]: value } : entry
     );
 
-    updateFields({ educations: updatedWorks });
+    updateFields({ edu: updatedWorks });
   };
 
   const addEducationEntry = () => {
     const newEntry = {
-      id: educations.length + 1,
       ename: "",
       estudy: "",
       sdate: new Date(),
       edate: new Date(),
       edesc: "",
     };
-    updateFields({ educations: [...educations, newEntry] });
+    updateFields({ edu: [...edu, newEntry] });
   };
 
   // const handleSubmit = (e: FormEvent) => {
   const handleSubmit = () => {
     // e.preventDefault();
-    console.log("Submitted Data:", educations);
+    console.log("Submitted Data:", edu);
   };
 
-  const handleDelete = (i: any) => {
-    const deleteVal = [...educations];
-    deleteVal.slice(i, 1);
+  const handleDelete = (i: number) => {
+    const updatedWorks = [...edu];
+    updatedWorks.splice(i, 1);
+    updateFields({ edu: updatedWorks });
   };
 
   return (
@@ -65,8 +64,8 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
         <Stack direction={"column"} spacing={2} margin={2}>
           <Grid container spacing={2} margin={2}>
             <form onSubmit={handleSubmit}>
-              {educations.map((entry, index) => (
-                <Grid container spacing={2} key={entry.id}>
+              {edu.map((entry, index) => (
+                <Grid container spacing={2} key={index}>
                   <Grid item xs={12}>
                     <Typography variant="h6">Education {index + 1}</Typography>
                   </Grid>
@@ -75,7 +74,7 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
                       label="Academy Name"
                       placeholder="Name"
                       fullWidth
-                      required
+                      required={true}
                       name="ename"
                       value={entry.ename}
                       onChange={(e) => handleInputChange(e, index)}
@@ -86,7 +85,7 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
                       label="Field Of Study"
                       fullWidth
                       required
-                      name="role"
+                      name="estudy"
                       value={entry.estudy}
                       onChange={(e) => handleInputChange(e, index)}
                     />
@@ -129,7 +128,7 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
                       onClick={() => handleDelete(index)}
                       variant="contained"
                       color="error"
-                      startIcon={<RemoveIcon />}
+                      startIcon={<DeleteIcon />}
                     >
                       Delete
                     </Button>

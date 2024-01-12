@@ -1,5 +1,5 @@
 export interface IWork {
-  id?: number;
+  id?: string;
   wname?: string;
   role?: string;
   sdate?: Date | any;

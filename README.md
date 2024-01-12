@@ -17,6 +17,6 @@ ReactJS application which helps the user to build their resume.
 - AWS - Deployment
 
 
-## Hosted in
+## Hosted in cloudflare
 
-* http://
+* https://simple-resume-d58.pages.dev

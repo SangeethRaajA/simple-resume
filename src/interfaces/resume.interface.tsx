@@ -19,5 +19,4 @@ export interface IResume {
   skills?: string[];
   createdAt?: number;
   updatedAt?: number;
-  onClickDelete?: void;
 }

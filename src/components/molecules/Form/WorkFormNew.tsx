@@ -1,19 +1,12 @@
 import { ChangeEvent, FC } from "react";
-import {
-  Button,
-  TextField,
-  Grid,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { Button, TextField, Grid, Typography, Stack } from "@mui/material";
 import WorkIcon from "@mui/icons-material/Work";
 import FormWrapper from "../../../wrapper/FormWrapper";
 import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type WorkData = {
-  works: {
-    id: number;
+  work: {
     wname: string;
     role: string;
     sdate: Date;
@@ -27,7 +20,7 @@ type WorkFormProps = WorkData & {
 };
 
 const WorkFormNew: FC<WorkFormProps> = (props) => {
-  const { works, updateFields } = props;
+  const { work, updateFields } = props;
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -35,34 +28,34 @@ const WorkFormNew: FC<WorkFormProps> = (props) => {
   ) => {
     const { name, value } = e.target;
 
-    const updatedWorks = works.map((entry, i) =>
+    const updatedWorks = work.map((entry, i) =>
       i === index ? { ...entry, [name]: value } : entry
     );
 
-    updateFields({ works: updatedWorks });
+    updateFields({ work: updatedWorks });
   };
 
   const addWorkEntry = () => {
     const newEntry = {
-      id: works.length + 1,
       wname: "",
       role: "",
       sdate: new Date(),
       edate: new Date(),
       wdesc: "",
     };
-    updateFields({ works: [...works, newEntry] });
+    updateFields({ work: [...work, newEntry] });
   };
 
   // const handleSubmit = (e: FormEvent) => {
   const handleSubmit = () => {
     // e.preventDefault();
-    console.log("Submitted Data:", works);
+    console.log("Submitted Data:", work);
   };
 
-  const handleDelete = (i: any) => {
-    const deleteVal = [...works];
-    deleteVal.slice(i, 1);
+  const handleDelete = (i: number) => {
+    const updatedWorks = [...work];
+    updatedWorks.splice(i, 1);
+    updateFields({ work: updatedWorks });
   };
 
   return (
@@ -71,8 +64,8 @@ const WorkFormNew: FC<WorkFormProps> = (props) => {
         <Stack direction={"column"} spacing={2} margin={2}>
           <Grid container spacing={2} margin={2}>
             <form onSubmit={handleSubmit}>
-              {works.map((entry, index) => (
-                <Grid container spacing={2} key={entry.id}>
+              {work.map((entry, index) => (
+                <Grid container spacing={2} key={index}>
                   <Grid item xs={12}>
                     <Typography variant="h6">
                       Work Experience {index + 1}
@@ -136,7 +129,7 @@ const WorkFormNew: FC<WorkFormProps> = (props) => {
                       onClick={() => handleDelete(index)}
                       variant="contained"
                       color="error"
-                      startIcon={<RemoveIcon />}
+                      startIcon={<DeleteIcon />}
                     >
                       Delete
                     </Button>

@@ -15,17 +15,23 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DeleteModal from "../atmos/DeleteModal/DeleteModal";
+import { DeleteModal } from "../atmos/DeleteModal/DeleteModal";
+import { useNavigate } from "react-router-dom";
 
 const ListView = () => {
   const [resumes, setResumes] = useState<IResume[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState<string | any>("");
 
+  //navigate page from list
+  let navigate = useNavigate();
 
+  //fetch resume list
   const fetchData = async () => {
     const response = await fetch(
       "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/list"
+      // "http://localhost:8080/api/v1/resume/list"
     );
     const data = await response.json();
     setResumes(data.data.resumeResponseDto);
@@ -36,9 +42,13 @@ const ListView = () => {
       throw new Error(msg);
     }
   };
-  
-  
 
+  // Delete funtion
+  const onClickDeleteResume = (id: any) => {
+    setDeleteId(id);
+    setModalOpen(true);
+    console.log(deleteId);
+  };
 
   useEffect(() => {
     fetchData();
@@ -48,6 +58,11 @@ const ListView = () => {
   // Render your data here
   return (
     <>
+      <DeleteModal
+        deleteId={deleteId}
+        isOpen={isModalOpen}
+        onClickClose={() => setModalOpen(false)}
+      />
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           display="flex"
@@ -103,7 +118,7 @@ const ListView = () => {
                             startIcon={<VisibilityIcon />}
                             size="medium"
                             onClick={() => {
-                              window.open(`/view/${resume?.id}`, "_blank");
+                              navigate(`/view/${resume?.id}`);
                             }}
                           >
                             View
@@ -114,7 +129,7 @@ const ListView = () => {
                             startIcon={<EditIcon />}
                             size="medium"
                             onClick={() => {
-                              window.open(`/edit/${resume?.id}`, "_blank");
+                              navigate(`/edit/${resume?.id}`);
                             }}
                           >
                             Edit
@@ -126,7 +141,7 @@ const ListView = () => {
                             startIcon={<DeleteIcon />}
                             size="medium"
                             onClick={() => {
-                              setModalOpen(true)
+                              onClickDeleteResume(resume?.id);
                             }}
                           >
                             Delete
