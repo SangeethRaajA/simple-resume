@@ -120,7 +120,7 @@ const DisplayForm = () => {
   const fetchData = async (formData: FormData) => {
     try {
       const response = await fetch(
-        "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
+        "//resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
         {
           method: "POST",
           headers: {
