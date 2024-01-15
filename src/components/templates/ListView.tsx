@@ -30,7 +30,7 @@ const ListView = () => {
   //fetch resume list
   const fetchData = async () => {
     const response = await fetch(
-      "//resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/list"
+      "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/list"
     );
     const data = await response.json();
     setResumes(data.data.resumeResponseDto);
