@@ -38,7 +38,7 @@ export const ResumeView = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/${id}`
+        `https://simple-resume-backend.onrender.com/api/v1/resume/${id}`
       );
       const data = await response.json();
       setDetails(data.data);

@@ -16,7 +16,7 @@ const DeleteModal = ({ deleteId, isOpen, onClickClose }: IDeleteModal) => {
   // DELETE request using fetch inside useEffect React hook
   const fetchData = async () => {
     const response = await fetch(
-      `http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/delete/${deleteId}`,
+      `https://simple-resume-backend.onrender.com/api/v1/resume/delete/${deleteId}`,
       { method: "DELETE" }
     )
     console.log(response);
