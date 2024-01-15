@@ -103,24 +103,23 @@ const DisplayForm = () => {
     });
   }
 
-  const { step, isFirstStep, isLastStep, back, next } =
-    UseMultistepFormResume([
-      <ProfileForm {...data} updateFields={updateFields} />,
-      <ObjectiveForm {...data} updateFields={updateFields} />,
-      <SkillFormNew {...data} updateFields={updateFields}/>,
-      <WorkFormNew {...data} updateFields={updateFields} />,
-      <EducationFormNew {...data} updateFields={updateFields} />,
-      <AchivementFormNew {...data} updateFields={updateFields}/>,
-    ]);
+  const { step, isFirstStep, isLastStep, back, next } = UseMultistepFormResume([
+    <ProfileForm {...data} updateFields={updateFields} />,
+    <ObjectiveForm {...data} updateFields={updateFields} />,
+    <SkillFormNew {...data} updateFields={updateFields} />,
+    <WorkFormNew {...data} updateFields={updateFields} />,
+    <EducationFormNew {...data} updateFields={updateFields} />,
+    <AchivementFormNew {...data} updateFields={updateFields} />,
+  ]);
 
-    //navigate page from list
+  //navigate page from list
   let navigate = useNavigate();
-  
+
   //fetch resume save
   const fetchData = async (formData: FormData) => {
     try {
       const response = await fetch(
-        "http://resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/save",
+        "https://simple-resume-backend.onrender.com/api/v1/resume/save",
         {
           method: "POST",
           headers: {
@@ -172,7 +171,7 @@ const DisplayForm = () => {
             alignItems="left"
             margin={2}
           >
-            <Grid margin={1} >
+            <Grid margin={1}>
               {!isFirstStep && (
                 <Button
                   type="button"
