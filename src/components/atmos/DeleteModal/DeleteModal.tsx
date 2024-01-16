@@ -4,6 +4,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
 
 interface IDeleteModal {
   deleteId: string;
@@ -14,17 +15,20 @@ interface IDeleteModal {
 const DeleteModal = ({ deleteId, isOpen, onClickClose }: IDeleteModal) => {
 
   // DELETE request using fetch inside useEffect React hook
-  const fetchData = async () => {
-    const response = await fetch(
-      `https://simple-resume-backend.onrender.com/api/v1/resume/delete/${deleteId}`,
-      { method: "DELETE" }
-    )
-    console.log(response);
-    
-  };
-
-  const onClickDeleteResume = () => {
-    fetchData();
+   const onClickDeleteResume = async () => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://simple-resume-backend.onrender.com/api/v1/resume/delete/${deleteId}`,
+        { method: "DELETE" }
+      )
+      if (response.ok) {
+        console.log("Resume deleted successfully");
+      } else {
+        console.error(`Error deleting resume. Status: ${response.status}`);
+      }    
+    };
+    await fetchData(); 
+    onClickClose(); 
   };
 
   return (
