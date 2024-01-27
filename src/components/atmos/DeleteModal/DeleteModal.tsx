@@ -18,7 +18,7 @@ const DeleteModal = ({ deleteId, isOpen, onClickClose }: IDeleteModal) => {
    const onClickDeleteResume = async () => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://simple-resume-backend.onrender.com/api/v1/resume/delete/${deleteId}`,
+        `http://simple-resume-backend.eu-north-1.elasticbeanstalk.com/api/v1/resume/delete/${deleteId}`,
         { method: "DELETE" }
       )
       if (response.ok) {
