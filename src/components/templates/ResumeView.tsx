@@ -51,7 +51,7 @@ export const ResumeView = () => {
     };
     fetchData();
     setIsLoading(false);
-  }, []);
+  }, [id]);
 
   return (
     <>
