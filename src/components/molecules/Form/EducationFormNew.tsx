@@ -78,6 +78,8 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
                       name="ename"
                       value={entry.ename}
                       onChange={(e) => handleInputChange(e, index)}
+                      helperText={!entry.ename ? "Academy Name Required" : " "}
+                      error={!entry.ename}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -88,6 +90,8 @@ const EducationFormNew: FC<EducationFormProps> = (props) => {
                       name="estudy"
                       value={entry.estudy}
                       onChange={(e) => handleInputChange(e, index)}
+                      helperText={!entry.estudy ? "Field Of Study Required" : " "}
+                      error={!entry.estudy}
                     />
                   </Grid>
                   <Grid item xs={6}>

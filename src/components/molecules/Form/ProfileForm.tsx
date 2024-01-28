@@ -41,6 +41,7 @@ const ProfileForm = ({
         <Stack direction={"column"} spacing={2} margin={1}>
           <Stack direction={"row"} spacing={2}>
             <TextField
+              required
               label="First Name"
               placeholder="John"
               fullWidth
@@ -48,8 +49,11 @@ const ProfileForm = ({
               name="firstname"
               value={firstname}
               onChange={(e) => updateFields({ firstname: e.target.value })}
+              helperText={!firstname ? "First Name Required" : ""}
+              error={!firstname}
             />
             <TextField
+              required
               label="Last Name"
               placeholder="Kennedy"
               fullWidth
@@ -57,15 +61,20 @@ const ProfileForm = ({
               name="lastname"
               value={lastname}
               onChange={(e) => updateFields({ lastname: e.target.value })}
+              helperText={!lastname ? "Last Name Required" : " "}
+              error={!lastname}
             />
           </Stack>
           <TextField
+            required
             label="Title"
             type="text"
             placeholder="UI Designer"
             name="Title"
             value={title}
             onChange={(e) => updateFields({ title: e.target.value })}
+            helperText={!title ? "Title Required" : " "}
+            error={!title}
           />
           <TextField
             label="Address Line 01"

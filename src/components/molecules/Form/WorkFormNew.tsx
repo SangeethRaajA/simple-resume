@@ -79,6 +79,8 @@ const WorkFormNew: FC<WorkFormProps> = (props) => {
                       name="wname"
                       value={entry.wname}
                       onChange={(e) => handleInputChange(e, index)}
+                      helperText={!entry.wname ? "Company Name Required" : " "}
+                      error={!entry.wname}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -89,6 +91,8 @@ const WorkFormNew: FC<WorkFormProps> = (props) => {
                       name="role"
                       value={entry.role}
                       onChange={(e) => handleInputChange(e, index)}
+                      helperText={!entry.role ? "Role Required" : " "}
+                      error={!entry.role}
                     />
                   </Grid>
                   <Grid item xs={6}>

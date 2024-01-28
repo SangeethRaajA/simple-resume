@@ -12,6 +12,7 @@ import EducationFormNew from "../molecules/Form/EducationFormNew";
 import SkillFormNew from "../molecules/Form/SkillFormNew";
 import AchivementFormNew from "../molecules/Form/AchivementFormNew";
 import { useNavigate } from "react-router-dom";
+import SuccessModal from "../atmos/SuccessModal/SuccessModal";
 
 type WorkData = {
   // id: number;
@@ -112,6 +113,8 @@ const DisplayForm = () => {
     <AchivementFormNew {...data} updateFields={updateFields} />,
   ]);
 
+  const [showModal, setShowModal] = useState(false);
+  const [mes, setMes] = useState<string>();
   //navigate page from list
   let navigate = useNavigate();
 
@@ -135,7 +138,10 @@ const DisplayForm = () => {
         const errorMsg = `Error occurred: ${
           responseData.error || response.status
         }`;
+        setMes(errorMsg);
         throw new Error(errorMsg);
+      }else{
+        setMes("Submission successful!")
       }
 
       // Handle the response data if needed
@@ -150,9 +156,14 @@ const DisplayForm = () => {
     next();
   }
   const handleClick = () => {
+    setShowModal(true);
     fetchData(data);
     console.log(data);
-    navigate(``);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    navigate(`/list`);
   };
 
   return (
@@ -218,6 +229,11 @@ const DisplayForm = () => {
               </Box>
             </Item>
           </Grid>
+          <SuccessModal
+            isOpen={showModal}
+            onClose={closeModal}
+            message={mes}
+          />
         </Grid>
       </Box>
     </>
